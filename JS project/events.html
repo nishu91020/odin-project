@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .one{
+            color:red;
+        }
+        .two{
+            color:blue;
+        }
+        .three{
+            background-color:pink;
+            border:2px solid black;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <p class="one">Hey I’m red!</p>
+    <h3 class="two">I’m a blue h3!</h3>
+    <!-- <div class="three">
+        <h1>I’m in a div</h1>
+        <p>ME TOO!</p>
+    </div> -->
+    <button onClick='alert("hello world")'>Click</button>
+    <button id="btn">Click1</button>
+    <button id="btn2">Click2</button>
+    <script>
+        // const btn=document.querySelector('#btn');
+        // btn.onClick=()=>alert("hello world");
+        //best method
+        const x=document.getElementById("btn");
+        x.addEventListener('click', (e)=>{
+            alert("hello world");
+        });
+        const myFun=(e)=>{
+            
+            alert("YAYYY!!");
+            console.log(e);
+            e.target.style.background="blue";
+        }
+        const btn2=document.querySelector('#btn2');
+        btn2.addEventListener('click', (e)=>{
+            myFun(e);
+        })
+        const div=document.createElement('div');
+        div.setAttribute('style','border:2px solid black; background:pink;');
+        div.innerHTML ='<h1>I’m in a div</h1><p>ME TOO!</p>';
+        document.body.appendChild(div);
+    </script>
+</body>
+</html>
+<!-- event listners-
+click
+dblclick
+keypress
+keydown
+keyup -->
