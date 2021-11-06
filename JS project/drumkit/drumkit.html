@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css"/>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div data-key="65" class="key">
+        <h2>A</h2>
+        <p>Click</p>
+        </div>
+        <div data-key="83" class="key">
+            <h2>S</h2>
+            <p>hithat</p>
+        </div>
+        <div data-key="68" class="key">
+            <h2>D</h2>
+            <p>kick</p>
+        </div>
+    </div>
+    <audio data-key="65" src="https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/DRUM%20MACHINES/606%20Basic/234[kb]606-cymbal1.wav.mp3"></audio>
+    <audio data-key="83" src="https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/DRUM%20MACHINES/808%20Extended/66[kb]808-bd02.wav.mp3"></audio>
+    <audio data-key="68" src="https://sampleswap.org/samples-ghost/DRUMS%20(FULL%20KITS)/DRUM%20MACHINES/909%20Extended/38[kb]909-Clap-1.wav.mp3"></audio>
+</body>
+<script>
+    window.addEventListener("keydown", function(e){
+        console.log(e);
+        const track=document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const playedKey=document.querySelector(`div[data-key="${e.keyCode}"]`);
+        if(track){
+            track.play();
+        }
+        track.currentTime=0;
+        function removeTransition(e){
+            if(e.propertyName !== 'transform')
+                return ;
+            else
+            {
+                playedKey.classList.remove("playing");
+            }
+            console.log(e.propertyName);
+        }
+        playedKey.classList.add("playing");
+        const keys=document.querySelectorAll('.key');
+        keys.forEach(key => {
+            addEventListener('transitionend',removeTransition);
+            
+        });
+       
+        
+        console.log(track);
+    })
+    
+</script>
+</html>

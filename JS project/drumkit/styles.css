@@ -1,0 +1,19 @@
+.container {
+    margin: 10%;
+    display: flex;
+    direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+.key {
+    padding: 0.5%;
+    border: 2px solid black;
+    width: 100px;
+
+    transition: all 1s;
+}
+.playing {
+    transform: scale(1.1);
+    border: 2px solid yellow;
+}
