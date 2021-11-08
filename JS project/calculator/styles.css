@@ -1,0 +1,27 @@
+body {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+.output {
+    width: 200px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 1px;
+    font-size: 30px;
+    text-align: right;
+    height: 40px;
+}
+.container {
+    margin-top: 2%;
+}
+.innerContainer {
+    margin-top: 2%;
+}
+.row1,
+.row2,
+.row3,
+.row4 {
+    margin: 1%;
+}
