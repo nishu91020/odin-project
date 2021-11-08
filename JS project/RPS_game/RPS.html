@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <button id="rock" onClick=play(this.id)  >Rock</button>
+        <button id="paper" onClick=play(this.id)  >Paper</button>
+        <button id="scissors" onClick=play(this.id) >Scissors</button>
+    </div>
+    
+    
+</body>
+<script>
+    var click=0, p=0, c=0;;
+    const gamePlay=(playerSelection,computerSelection)=>{
+        if((playerSelection.toLowerCase() == 'rock' && computerSelection == 'scissors') || 
+                    (playerSelection.toLowerCase() == 'paper' && computerSelection == 'rock') || 
+                        (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'paper'))
+                {
+                    const div=document.createElement('div');
+                    div.innerHTML ="you win!"
+                    const cont=document.querySelector('.container');
+                    cont.appendChild(div);
+                    p++;
+                }
+        else if(playerSelection.toLowerCase() == computerSelection)
+            {
+                const div=document.createElement('div');
+                    div.innerHTML ="match draw!"
+                    const cont=document.querySelector('.container');
+                    cont.appendChild(div);
+            }
+        else
+            {
+               const div=document.createElement('div');
+                    div.innerHTML ="computer wins!"
+                    const cont=document.querySelector('.container');
+                    cont.appendChild(div);
+                    c++;
+            }
+            if(click === 5)
+            {
+                const div=document.createElement('div');
+                if(p>c)
+                {
+                    
+                    div.innerHTML ="game finished...you win!"
+                    const cont=document.querySelector('.container');
+                    cont.appendChild(div);
+                }
+                else if(c>p)
+                {
+                    div.innerHTML ="game finished...computer wins!"
+                    const cont=document.querySelector('.container');
+                    cont.appendChild(div);
+                }
+                else
+                {
+                    div.innerHTML ="game finished...match draw!"
+                    const cont=document.querySelector('.container');
+                    cont.appendChild(div);
+                }
+                p=0;
+                c=0;
+                click=0;
+                
+            }
+    }
+    computerPlay=()=>{
+        const option=['rock','paper','scissors'];
+        var item=Math.floor(Math.random()*option.length);
+        computerSelection=option[item];
+        console.log(computerSelection);
+        return computerSelection;
+    }
+
+    const play=(id)=>{
+        console.log(id);
+        click++;
+        const computerSelection=computerPlay();
+        gamePlay(id,computerSelection);
+        
+    }
+</script>
+</html>
