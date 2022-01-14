@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+</head>
+<body>
+    <div style="align-items: center; justify-content: center; padding:2%; margin:2%;">
+        <div id="card"></div>
+        <button onClick="location.href='../library/form.html'">ADD BOOK</button>
+    </div>
+    
+    <script>
+        let library = [{
+            "name": "Power of subconsious mind",
+            "author": "J K Rowling",
+            "pages": 200,
+            "read": "Yes"
+        },
+        {
+            "name": "Think and grow rich",
+            "author": "R C Paul",
+            "pages": 140,
+            "read": "Yes"
+        }
+    ];
+    
+    library.forEach(book=>{
+        let bookCard=document.getElementById("card");
+        bookCard.innerHTML += `
+        <div style="background-color: #423542; border-radius: 5px; padding:2%; margin:2%;  color: #ffffff">
+        <div>Book name - ${book.name}</div>
+         <div>Author - ${book.author}</div>
+         <div>Number of pages - ${book.pages}</div>
+         <div>Read(Yes/No) - ${book.read}</div>
+         </div>`
+        console.log(`${book.name}, ${book.author}, ${book.page}, ${book.read}`);
+
+    })
+    </script>
+     
+    
+</body>
+</html>
