@@ -4,43 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Library</title>
 </head>
 <body>
     <div style="align-items: center; justify-content: center; padding:2%; margin:2%;">
         <div id="card"></div>
-        <button onClick="location.href='../library/form.html'">ADD BOOK</button>
+        <div style="justify-content:center; align-items: center;text-align:center; background-color: #423542; border-radius: 5px; padding:2%; margin:2%;  color: #ffffff">
+        <form >
+            <h4>ADD A BOOK TO YOUR LIBRARY</h4>
+            <div style="padding: 1%">
+                <label>Book Title &nbsp;</label><input id="name" type="text" name="title"  placeholder="Title">
+            </div>
+            <div style="padding: 1%"></divstyle>
+                <label>Author &nbsp;</label><input id="author" type="text" name="author"   placeholder="Author">
+            </div>
+            <div style="padding: 1%">
+                <label>Number of pages &nbsp;</label><input id="page" type="number" name="page"  placeholder="Number of pages">
+            </div>
+            <div style="padding: 1%">
+                <label>Read (Yes/No) &nbsp;</label><input id="read" type="boolean" name="read" placeholder="Read" >
+            </div>
+            <button id="add">ADD+</button>
+        </form>
     </div>
-    
-    <script>
-        let library = [{
-            "name": "Power of subconsious mind",
-            "author": "J K Rowling",
-            "pages": 200,
-            "read": "Yes"
-        },
-        {
-            "name": "Think and grow rich",
-            "author": "R C Paul",
-            "pages": 140,
-            "read": "Yes"
-        }
-    ];
-    
-    library.forEach(book=>{
-        let bookCard=document.getElementById("card");
-        bookCard.innerHTML += `
-        <div style="background-color: #423542; border-radius: 5px; padding:2%; margin:2%;  color: #ffffff">
-        <div>Book name - ${book.name}</div>
-         <div>Author - ${book.author}</div>
-         <div>Number of pages - ${book.pages}</div>
-         <div>Read(Yes/No) - ${book.read}</div>
-         </div>`
-        console.log(`${book.name}, ${book.author}, ${book.page}, ${book.read}`);
-
-    })
-    </script>
-     
-    
+    </div>
+     <script src="index.js"></script>
+     <script src="form.js"></script>
 </body>
 </html>
