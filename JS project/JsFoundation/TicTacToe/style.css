@@ -32,6 +32,7 @@ nav {
 }
 .board {
     display: grid;
+    font-size: 50px;
     grid-template-columns: repeat(3, 8vw);
     grid-template-rows: repeat(3, 8vw);
 }
@@ -52,9 +53,11 @@ nav {
     cursor: pointer;
     background-color: rgb(56, 47, 79);
 }
-.win {
-    display: none;
+.win img {
+    width: 0;
+    transition: width 1s ease-in-out;
 }
+
 .bl-0 {
     border-left: 0px;
 }
