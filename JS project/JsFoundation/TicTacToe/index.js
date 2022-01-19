@@ -10,6 +10,7 @@ const players = [
 ];
 let currPlayer = players[0];
 let gameover = false;
+
 //change turn
 const changeTurn = () => {
     return currPlayer === players[0] ? players[1] : players[0];
@@ -52,4 +53,8 @@ reset.addEventListener('click', () => {
         let boxText = element.querySelector('.boxText');
         boxText.innerHTML = '';
     });
+    document.querySelector('.win').getElementsByTagName('img')[0].style.width = 0;
+    gameover = false;
+    currPlayer = players[0];
+    document.querySelector('#turnDisplay').innerText = 'player1 with symbol X plays now';
 });

@@ -55,7 +55,7 @@ nav {
 }
 .win img {
     width: 0;
-    transition: width 1s ease-in-out;
+    transition: width 0.5s ease-in-out;
 }
 
 .bl-0 {

@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.header {
+    color: #fff;
+    font-size: 2vw;
+    list-style: none;
+    background-color: cadetblue;
+    padding: 1vw;
+    cursor: pointer;
+}
+.dropdown-menu {
+    display: none;
+}
+ul {
+    list-style: none;
+}
+#list {
+    width: 10vw;
+    padding: 0.5vw;
+    font-size: 1.5vw;
+    color: #fff;
+    background-color: cadetblue;
+}
+.ele {
+    border: 2px solid #fff;
+}

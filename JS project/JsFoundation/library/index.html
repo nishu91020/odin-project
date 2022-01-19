@@ -4,28 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="./style.css">
     <title>Library</title>
 </head>
 <body>
+    <nav>
+        <ul class="header">
+            <li>My Library</li>
+        </ul>
+    </nav>
     <div style="align-items: center; justify-content: center; padding:2%; margin:2%;">
         <div id="card"></div>
-        <div style=" background-color: #423542; border-radius: 5px; padding:2%; margin:2%;  color: #ffffff">
+        <div class="form">
         <form >
-            <h4 style="margin-left: 1%">ADD A BOOK TO YOUR LIBRARY</h4>
+            <h3 style="margin-left: 1%">ADD A BOOK TO YOUR LIBRARY</h3>
             <div style="padding: 1%">
-                <label>Book Title &nbsp;</label><input id="name" type="text" name="title"  placeholder="Title">
+                <label>Book Title &nbsp;</label><input class="input-text" id="name" type="text" name="title"  placeholder="Title">
             </div>
             <div style="padding: 1%"></divstyle>
-                <label>Author &nbsp;</label><input id="author" type="text" name="author"   placeholder="Author">
+                <label>Author &nbsp;</label><input class="input-text" id="author"  type="text" name="author"   placeholder="Author">
             </div>
             <div style="padding: 1%">
-                <label>Number of pages &nbsp;</label><input id="page" type="number" name="page"  placeholder="Number of pages">
+                <label>Number of pages &nbsp;</label><input class="input-text" id="page" type="number" name="page"  placeholder="Number of pages">
             </div>
             <div style="padding: 1%">
-                <label>Read (Yes/No) &nbsp;</label><input id="read" type="boolean" name="read" placeholder="Read" >
+                <label>Read (Yes/No) &nbsp;</label><input class="input-text" id="read" type="boolean" name="read" placeholder="Read" >
             </div>
-            <button id="add" style="margin-left: 1%">ADD+</button>
+            <button id="add" style="margin-left: 1%">ADD</button>
         </form>
     </div>
     </div>
