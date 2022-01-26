@@ -22,10 +22,20 @@
         </ul>
     </div>
     <div class="carousel">
-        <img id="img1" src="./bg1.jfif" width="640px">
-        <img  id="img2" src="./bg2.jfif" width="640px">
-        <img  id="img3" src="./bg3.jfif" width="640px">
-        <img  id="img4" src="./bg4.jfif" width="640px">
+        <div class="mySlide fade">
+            <img id="img1" src="./bg1.jfif" width="100%">
+        </div>
+        <div class="mySlide fade">
+            <img  id="img2" class="mySlide" src="./bg2.jfif" width="100%">
+        </div>
+        <div class="mySlide fade">
+            <img  id="img3" class="mySlide" src="./bg3.jfif" width="100%">
+        </div>
+        <div class="mySlide fade">
+            <img  id="img4" class="mySlide" src="./bg4.jfif" width="100%">
+        </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
      <script src="./index.js"></script>
 </body>
