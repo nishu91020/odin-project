@@ -1,63 +1,43 @@
 import './style.css';
-import ListItem from '../src/components/listItem';
+import Header from './components/header';
+import ItemForm from './components/itemForm';
+import NotCompletedItem from './components/completedItem';
 export default function ToDoList () {
     let outerContainer = document.createElement('div');
 
     //page header
-    let pageHeader = document.createElement('div');
-    pageHeader.classList.add('page-header');
-    pageHeader.innerHTML = 'Things';
-    outerContainer.appendChild(pageHeader);
+
+    outerContainer.appendChild(Header());
 
     //to do list container
     let listContainer = document.createElement('div');
     listContainer.classList.add('list-container');
 
-    // 1)Item form
-    let workForm = document.createElement('form');
-    workForm.classList.add('workForm');
-
-    let formHeading = document.createElement('div');
-    formHeading.innerHTML = `<h4>Add a work to your TO-DO list</h4>`;
-    formHeading.classList.add('workFormHeading');
-    workForm.appendChild(formHeading);
-
-    let title = document.createElement('input');
-    title.classList.add('title');
-    title.placeholder = 'Title';
-
-    let desc = document.createElement('textarea');
-    desc.classList.add('desc');
-    desc.placeholder = 'Description';
-
-    let dueDate = document.createElement('input');
-    dueDate.classList.add('dueDate');
-    dueDate.placeholder = 'Due Date';
-
-    let add = document.createElement('button');
-    add.innerText = 'Add';
-    add.classList.add('btn');
-    let buttonContainer = document.createElement('div');
-    buttonContainer.classList.add('btnContainer');
-    buttonContainer.appendChild(add);
-
-    workForm.appendChild(title);
-    workForm.appendChild(desc);
-    workForm.appendChild(dueDate);
-    workForm.appendChild(buttonContainer);
-    listContainer.appendChild(workForm);
-
     //2) Items in the list container
     let ItemBox = document.createElement('div');
-    let ItemBoxHeader = document.createElement('div');
 
-    ItemBoxHeader.innerHTML = `<h4>Not Completed</h4>`;
-    ItemBoxHeader.classList.add('ItemBoxHeader');
-    ItemBox.appendChild(ItemBoxHeader);
+    let NotCompleted = document.createElement('div');
+    let Completed = document.createElement('div');
+    // 1)Item form
+    listContainer.appendChild(ItemForm(NotCompleted, Completed));
 
-    ItemBox.appendChild(ListItem('coding', '2 DSA problem and 2 CP problems', '30/01/22'));
+    let ItemBoxNotCompleted = document.createElement('div');
+    ItemBoxNotCompleted.innerHTML = `<h4>Not Completed Tasks</h4>`;
+    ItemBoxNotCompleted.classList.add('itemContainer');
+    ItemBoxNotCompleted.classList.add('center-item');
+    ItemBoxNotCompleted.classList.add('ItemBoxHeader');
+    ItemBox.appendChild(ItemBoxNotCompleted);
+    ItemBox.appendChild(NotCompleted);
+
+    let ItemBoxCompleted = document.createElement('div');
+    ItemBoxCompleted.classList.add('itemContainer');
+    ItemBoxCompleted.classList.add('center-item');
+    ItemBoxCompleted.innerHTML = `<h4>Completed Tasks</h4>`;
+    ItemBoxCompleted.classList.add('ItemBoxHeader');
+    ItemBox.appendChild(ItemBoxCompleted);
+    ItemBox.appendChild(Completed);
+
     listContainer.appendChild(ItemBox);
-
     outerContainer.appendChild(listContainer);
 
     return outerContainer;
