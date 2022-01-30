@@ -39,10 +39,8 @@ export function deleteDoneItem (index) {
 }
 
 function addItemToNotCompletedList (title, desc, dueDate, NotCompleted, Completed) {
-    if (title != '' && desc != '' && dueDate != '') {
-        Items.push({ title, desc, dueDate });
-        displayList(NotCompleted, Completed);
-    }
+    Items.push({ title, desc, dueDate });
+    displayList(NotCompleted, Completed);
 }
 
 export default function ItemForm (NotCompleted, Completed) {
@@ -58,15 +56,16 @@ export default function ItemForm (NotCompleted, Completed) {
     let title = document.createElement('input');
     title.classList.add('title');
     title.placeholder = 'Title';
-
+    title.required = true;
     let desc = document.createElement('textarea');
     desc.classList.add('desc');
     desc.placeholder = 'Description';
-
+    desc.required = true;
     let dueDate = document.createElement('input');
     dueDate.classList.add('dueDate');
     dueDate.placeholder = 'Due Date';
-    dueDate.type = 'date';
+    dueDate.type = 'datetime-local';
+    dueDate.required = true;
 
     let add = document.createElement('button');
     add.innerText = 'Add';
