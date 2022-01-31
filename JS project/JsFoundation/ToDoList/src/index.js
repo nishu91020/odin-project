@@ -1,7 +1,6 @@
 import './style.css';
 import Header from './components/header';
 import ItemForm from './components/itemForm';
-import NotCompletedItem from './components/completedItem';
 export default function ToDoList () {
     let outerContainer = document.createElement('div');
 
