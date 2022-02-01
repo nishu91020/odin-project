@@ -23,14 +23,15 @@ export default class App extends Component {
         this.setState({ arr: this.state.arr.concat(this.state.value), value: { text: '', id: uniqid() } });
     };
     render () {
+        const { value, arr } = this.state;
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>Item:</label>
-                    <input type="text" onChange={this.handleChange} value={this.state.value.text} />
+                    <input type="text" onChange={this.handleChange} value={value.text} />
                     <button type="submit">Submit</button>
                 </form>
-                <Overview list={this.state.arr} />
+                <Overview list={arr} />
             </div>
         );
     }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 class Overview extends Component {
     render () {
+        const { list } = this.props;
         return (
             <ul>
-                {this.props.list.map(item => {
+                {list.map(item => {
                     return <li key={item.id}>{item.text}</li>;
                 })}
             </ul>
