@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import FunCalc from '../src/components/functionalCalc';
+import Calc from '../src/components/classCalc';
 
 class App extends Component {
     constructor (props) {
@@ -22,6 +24,8 @@ class App extends Component {
                 <h4>count={this.state.count}</h4>
                 <button onClick={this.incrementCount}>+</button>
                 <button onClick={this.decrementCount}>-</button>
+                <FunCalc />
+                <Calc />
             </div>
         );
     }
