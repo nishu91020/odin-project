@@ -8,19 +8,22 @@ export default class App extends Component {
         this.state = {
             value: {
                 text: '',
-                id: uniqid()
+                id: uniqid(),
+                count: 1
             },
-            arr: []
+            arr: [],
+            count: 1
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleChange = e => {
-        this.setState({ value: { text: e.target.value, id: this.state.value.id } });
+        this.setState({ value: { text: e.target.value, id: this.state.value.id, count: this.state.value.count } });
     };
     handleSubmit = e => {
         e.preventDefault();
-        this.setState({ arr: this.state.arr.concat(this.state.value), value: { text: '', id: uniqid() } });
+        this.setState({ arr: this.state.arr.concat(this.state.value), value: { text: '', id: uniqid(), count: this.state.value.count + 1 } });
     };
     render () {
         const { value, arr } = this.state;

@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
 class Overview extends Component {
+    constructor (props) {
+        super();
+        // this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    // handleDelete = item => {
+    //     this.props.list.forEach(thing => {
+    //         if (item.id === thing.id) {
+    //             this.props.list.splice(thing.index, 1);
+    //         }
+    //     });
+    // };
     render () {
         const { list } = this.props;
         return (
-            <ul>
+            <div>
                 {list.map(item => {
-                    return <li key={item.id}>{item.text}</li>;
+                    return (
+                        <div key={item.id}>
+                            {item.count}.{item.text}
+                            <button>Delete</button>
+                            {/* <button onClick={this.handleDelete(item)}>delete</button> */}
+                        </div>
+                    );
                 })}
-            </ul>
+            </div>
         );
     }
 }
