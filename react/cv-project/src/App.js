@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { makeStyles, Button } from '@material-ui/core';
 import BasicInfo from './components/basicInfo';
 import EducationalDetails from './components/educationalDetails';
 import IndustryExperience from './components/industryExperience';
+import Header from './components/header';
 
 function App () {
+    const [ submitted, setSubmitted ] = useState(false);
     const useStyles = makeStyles({
         App: {
             padding: '0px',
@@ -14,24 +17,45 @@ function App () {
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#f3f2ef',
-            fontStyle: 'italic'
+            fontStyle: 'italic',
+            overflow: 'hidden'
         },
         btn: {
             marginBottom: '1vw'
         }
     });
     const classes = useStyles();
-    return (
-        <div className={classes.App}>
-            <h2>Resume</h2>
-            <BasicInfo />
-            <EducationalDetails />
-            <IndustryExperience />
-            <Button className={classes.btn} color="primary" variant="contained">
-                Submit
-            </Button>
-        </div>
-    );
+    const handleSubmit = () => {
+        setSubmitted(!submitted);
+    };
+    if (!submitted) {
+        return (
+            <div className={classes.App}>
+                <Header />
+                <BasicInfo formSubmitted={submitted} />
+                <EducationalDetails formSubmitted={submitted} />
+                <IndustryExperience formSubmitted={submitted} />
+
+                <Button className={classes.btn} color="primary" variant="contained" onClick={handleSubmit}>
+                    Submit
+                </Button>
+            </div>
+        );
+    }
+    else {
+        return (
+            <div className={classes.App}>
+                <h2>Resume</h2>
+                <BasicInfo formSubmitted={submitted} />
+                <EducationalDetails formSubmitted={submitted} />
+                <IndustryExperience formSubmitted={submitted} />
+
+                <Button className={classes.btn} color="primary" variant="contained" onClick={handleSubmit}>
+                    Edit
+                </Button>
+            </div>
+        );
+    }
 }
 
 export default App;
