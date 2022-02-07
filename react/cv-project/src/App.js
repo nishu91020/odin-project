@@ -1,7 +1,7 @@
 import { makeStyles, Button } from '@material-ui/core';
-import BasicInfoForm from './components/basicInfoForm';
-import EducationalDetailsForm from './components/educationalDetailsForm';
-import IndustryExperienceForm from './components/industryExperienceForm';
+import BasicInfo from './components/basicInfo';
+import EducationalDetails from './components/educationalDetails';
+import IndustryExperience from './components/industryExperience';
 
 function App () {
     const useStyles = makeStyles({
@@ -24,9 +24,9 @@ function App () {
     return (
         <div className={classes.App}>
             <h2>Resume</h2>
-            <BasicInfoForm />
-            <EducationalDetailsForm />
-            <IndustryExperienceForm />
+            <BasicInfo />
+            <EducationalDetails />
+            <IndustryExperience />
             <Button className={classes.btn} color="primary" variant="contained">
                 Submit
             </Button>
