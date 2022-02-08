@@ -48,7 +48,46 @@ class EducationalDetailsForm extends Component {
     render () {
         const { submitted, year1, institution1, course1, percentage1, year2, institution2, course2, percentage2, year3, institution3, course3, percentage3 } = this.state;
         const { classes } = this.props;
-        if (!submitted) {
+        if (submitted || this.props.formSubmitted) {
+            const rows = [
+                { year: year1, ins: institution1, cou: course1, per: percentage1 },
+                { year: year2, ins: institution2, cou: course2, per: percentage2 },
+                { year: year3, ins: institution3, cou: course3, per: percentage3 }
+            ];
+            return (
+                <Card className={classes.form}>
+                    <h2>Educational details</h2>
+                    <TableContainer component={Paper} style={{ width: '60vw' }} elevation={4}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Year</TableCell>
+                                    <TableCell>Institute</TableCell>
+                                    <TableCell>Course</TableCell>
+                                    <TableCell>Percentage</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map(row => (
+                                    <TableRow key={row.year}>
+                                        <TableCell>{row.year}</TableCell>
+                                        <TableCell>{row.ins}</TableCell>
+                                        <TableCell>{row.cou}</TableCell>
+                                        <TableCell>{row.per}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    {!this.props.formSubmitted ? (
+                        <Button onClick={this.handleSubmit} style={{ marginTop: '1vw' }} color="primary" variant="contained">
+                            Edit
+                        </Button>
+                    ) : null}
+                </Card>
+            );
+        }
+        else {
             return (
                 <Card className={classes.form}>
                     <h3>Educational details</h3>
@@ -163,43 +202,6 @@ class EducationalDetailsForm extends Component {
 
                     <Button color="primary" variant="contained" onClick={this.handleSubmit}>
                         Submit
-                    </Button>
-                </Card>
-            );
-        }
-        else {
-            const rows = [
-                { year: year1, ins: institution1, cou: course1, per: percentage1 },
-                { year: year2, ins: institution2, cou: course2, per: percentage2 },
-                { year: year3, ins: institution3, cou: course3, per: percentage3 }
-            ];
-            return (
-                <Card className={classes.form}>
-                    <h2>Educational details</h2>
-                    <TableContainer component={Paper} style={{ width: '60vw' }} elevation={4}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Year</TableCell>
-                                    <TableCell>Institute</TableCell>
-                                    <TableCell>Course</TableCell>
-                                    <TableCell>Percentage</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {rows.map(row => (
-                                    <TableRow key={row.year}>
-                                        <TableCell>{row.year}</TableCell>
-                                        <TableCell>{row.ins}</TableCell>
-                                        <TableCell>{row.cou}</TableCell>
-                                        <TableCell>{row.per}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    <Button onClick={this.handleSubmit} style={{ marginTop: '1vw' }} color="primary" variant="contained">
-                        Edit
                     </Button>
                 </Card>
             );

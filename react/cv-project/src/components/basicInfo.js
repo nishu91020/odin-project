@@ -52,7 +52,24 @@ class BasicInfoForm extends Component {
     }
     render () {
         const { classes } = this.props;
-        if (!this.state.submitted) {
+        if (this.state.submitted || this.props.formSubmitted) {
+            return (
+                <Card className={classes.form}>
+                    <h2>Basic Information</h2>
+                    <div>
+                        <Typography variant="subtitle1">Name - {this.state.name}</Typography>
+                        <Typography variant="subtitle1">Email - {this.state.email}</Typography>
+                        <Typography variant="subtitle1">Phone - {this.state.phone}</Typography>
+                        {!this.props.formSubmitted ? (
+                            <Button variant="contained" color="primary" onClick={this.handleEdit}>
+                                Edit
+                            </Button>
+                        ) : null}
+                    </div>
+                </Card>
+            );
+        }
+        else {
             return (
                 <Card className={classes.form}>
                     <h2>Basic Information</h2>
@@ -64,21 +81,6 @@ class BasicInfoForm extends Component {
                     <Button variant="contained" color="primary" onClick={this.handleSubmit}>
                         Submit
                     </Button>
-                </Card>
-            );
-        }
-        else {
-            return (
-                <Card className={classes.form}>
-                    <h2>Basic Information</h2>
-                    <div>
-                        <Typography variant="subtitle1">Name - {this.state.name}</Typography>
-                        <Typography variant="subtitle1">Email - {this.state.email}</Typography>
-                        <Typography variant="subtitle1">Phone - {this.state.phone}</Typography>
-                        <Button variant="contained" color="primary" onClick={this.handleEdit}>
-                            Edit
-                        </Button>
-                    </div>
                 </Card>
             );
         }

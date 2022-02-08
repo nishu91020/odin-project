@@ -50,7 +50,42 @@ class IndustryExperienceForm extends Component {
     render () {
         const { submitted, year1, org1, pos1, res1, year2, org2, pos2, res2, year3, org3, pos3, res3 } = this.state;
         const { classes } = this.props;
-        if (!submitted) {
+        if (submitted || this.props.formSubmitted) {
+            const rows = [ { year: year1, org: org1, pos: pos1, res: res1 }, { year: year2, org: org2, pos: pos2, res: res2 }, { year: year3, org: org3, pos: pos3, res: res3 } ];
+            return (
+                <Card className={classes.form}>
+                    <h2>Industry Experience</h2>
+                    <TableContainer component={Paper} style={{ width: '60vw' }} elevation={4}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Year</TableCell>
+                                    <TableCell>Organization</TableCell>
+                                    <TableCell>Position</TableCell>
+                                    <TableCell>Responsibility</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map(row => (
+                                    <TableRow key={row.year}>
+                                        <TableCell>{row.year}</TableCell>
+                                        <TableCell>{row.org}</TableCell>
+                                        <TableCell>{row.pos}</TableCell>
+                                        <TableCell style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{row.res}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    {!this.props.formSubmitted ? (
+                        <Button onClick={this.handleSubmit} style={{ marginTop: '1vw' }} color="primary" variant="contained">
+                            Edit
+                        </Button>
+                    ) : null}
+                </Card>
+            );
+        }
+        else {
             return (
                 <Card className={classes.form}>
                     <h3> Industry Experience</h3>
@@ -170,39 +205,6 @@ class IndustryExperienceForm extends Component {
 
                     <Button color="primary" variant="contained" onClick={this.handleSubmit}>
                         Submit
-                    </Button>
-                </Card>
-            );
-        }
-        else {
-            const rows = [ { year: year1, org: org1, pos: pos1, res: res1 }, { year: year2, org: org2, pos: pos2, res: res2 }, { year: year3, org: org3, pos: pos3, res: res3 } ];
-            return (
-                <Card className={classes.form}>
-                    <h2>Industry Experience</h2>
-                    <TableContainer component={Paper} style={{ width: '60vw' }} elevation={4}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Year</TableCell>
-                                    <TableCell>Organization</TableCell>
-                                    <TableCell>Position</TableCell>
-                                    <TableCell>Responsibility</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {rows.map(row => (
-                                    <TableRow key={row.year}>
-                                        <TableCell>{row.year}</TableCell>
-                                        <TableCell>{row.org}</TableCell>
-                                        <TableCell>{row.pos}</TableCell>
-                                        <TableCell style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{row.res}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    <Button onClick={this.handleSubmit} style={{ marginTop: '1vw' }} color="primary" variant="contained">
-                        Edit
                     </Button>
                 </Card>
             );
