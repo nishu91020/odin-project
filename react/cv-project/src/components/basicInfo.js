@@ -60,11 +60,11 @@ class BasicInfoForm extends Component {
                         <Typography variant="subtitle1">Name - {this.state.name}</Typography>
                         <Typography variant="subtitle1">Email - {this.state.email}</Typography>
                         <Typography variant="subtitle1">Phone - {this.state.phone}</Typography>
-                        {!this.props.formSubmitted ? (
+                        {!this.props.formSubmitted && (
                             <Button variant="contained" color="primary" onClick={this.handleEdit}>
                                 Edit
                             </Button>
-                        ) : null}
+                        )}
                     </div>
                 </Card>
             );
