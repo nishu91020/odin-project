@@ -6,12 +6,12 @@ import Mainmenu from './Mainmenu';
 import Othermenu from './Othermenu';
 function Sidebar () {
     const Aside = styled.aside`
-        padding-left: 3%;
+        padding-left: 4%;
         padding-top: 2%;
         display: grid;
+        grid-area: 1/1/5/1;
         background: #0892d0;
         color: white;
-        border: 5px solid green;
     `;
     const DashboardHeader = styled.div`
         display: grid;

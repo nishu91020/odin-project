@@ -7,10 +7,11 @@ import BtnGroup from './BtnGroup';
 
 function Header () {
     const HeaderContainer = styled.div`
-        padding: 1%;
         box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
         display: grid;
-        grid-template-rows: 80px 80px;
+        padding: 1%;
+        grid-area: 1/2/1/4;
+        grid-template-rows: 70px 60px;
         grid-template-columns: 4fr 1fr;
     `;
     const Input = styled.input`
