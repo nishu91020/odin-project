@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Card ({ cardImg, Name }) {
+function Card ({ HandleClick, item }) {
     const CardContainer = styled.div`
         background: #fec0cb;
         width: 300px;
@@ -21,9 +21,9 @@ function Card ({ cardImg, Name }) {
         }
     `;
     return (
-        <CardContainer>
-            <img src={cardImg} alt="img" width="300px" style={{ borderRadius: '10px' }} />
-            <h2>{Name}</h2>
+        <CardContainer onClick={() => HandleClick(item)}>
+            <img src={item.photo} alt={item.name} width="300px" style={{ borderRadius: '10px' }} />
+            <h2>{item.name}</h2>
         </CardContainer>
     );
 }

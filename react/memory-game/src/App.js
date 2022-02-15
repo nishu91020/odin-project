@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Card from './Card';
 import { Items } from './Items';
+
 function App () {
+    const [ score, setScore ] = useState(0);
+    const [ HighestScore, setHighestScore ] = useState(0);
     const DivContainer = styled.div`
         font-family: 'Dancing Script', cursive;
         font-family: 'Oswald', sans-serif;
@@ -19,6 +23,28 @@ function App () {
         display: grid;
         grid-template-columns: 6fr 1fr;
     `;
+    const shuffleArray = () => {
+        for (let i = 0; i < Items.length; i++) {
+            let j = Math.floor(Math.random() * (Items.length - i) + i);
+            let temp = Items[i];
+            Items[i] = Items[j];
+            Items[j] = temp;
+        }
+    };
+    const HandleClick = item => {
+        console.log(item);
+        shuffleArray();
+        if (item.selected === true) {
+            setHighestScore(Math.max(HighestScore, score));
+            setScore(0);
+            Items.forEach(ele => {
+                ele.selected = false;
+            });
+            return;
+        }
+        item.selected = true;
+        setScore(score + 1);
+    };
     return (
         <DivContainer>
             <DivHeader>
@@ -27,11 +53,11 @@ function App () {
                     <h2 style={{ fontSize: '30px' }}>Earn points by clicking on cards but don't click any twice!</h2>
                 </div>
                 <div style={{ fontSize: '24px', fontWeight: 'bold' }}>
-                    <div>Score: 0</div>
-                    <div>Highest Score: 0</div>
+                    <div>Score: {score}</div>
+                    <div>Highest Score: {HighestScore}</div>
                 </div>
             </DivHeader>
-            <CardOuterContainer>{Items.map(item => <Card cardImg={item.photo} Name={item.name} />)}</CardOuterContainer>
+            <CardOuterContainer>{Items.map((item, index) => (index < 8 ? <Card key={item.id} HandleClick={HandleClick} item={item} /> : null))}</CardOuterContainer>
         </DivContainer>
     );
 }

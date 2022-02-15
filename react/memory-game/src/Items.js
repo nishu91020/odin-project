@@ -1,3 +1,4 @@
+import uniqid from 'uniqid';
 import Princess from './img/princess.jfif';
 import Dog from './img/dog.jfif';
 import Dc from './img/dc.jpg';
@@ -14,18 +15,18 @@ import Sponge from './img/sponge.jfif';
 import Yoda from './img/yoda.jpg';
 
 export const Items = [
-    { photo: Princess, name: 'Princess' },
-    { photo: Dog, name: 'Pluto' },
-    { photo: Dc, name: 'Donald Duck' },
-    { photo: Cart1, name: 'Stitch' },
-    { photo: Donkey, name: 'Eeyore' },
-    { photo: Fish, name: 'Dory' },
-    { photo: Mickey, name: 'Mickey Mouse' },
-    { photo: Oswald, name: 'Oswald' },
-    { photo: Pig, name: 'Pigge' },
-    { photo: Pinocchio, name: 'Pinocchio' },
-    { photo: Pooh, name: 'Pooh' },
-    { photo: Snowman, name: 'Snowman' },
-    { photo: Sponge, name: 'Sponge Bob' },
-    { photo: Yoda, name: 'Yoda' }
+    { id: uniqid(), photo: Princess, name: 'Princess', selected: false },
+    { id: uniqid(), photo: Dog, name: 'Pluto', selected: false },
+    { id: uniqid(), photo: Dc, name: 'Donald Duck', selected: false },
+    { id: uniqid(), photo: Cart1, name: 'Stitch', selected: false },
+    { id: uniqid(), photo: Donkey, name: 'Eeyore', selected: false },
+    { id: uniqid(), photo: Fish, name: 'Dory', selected: false },
+    { id: uniqid(), photo: Mickey, name: 'Mickey Mouse', selected: false },
+    { id: uniqid(), photo: Oswald, name: 'Oswald', selected: false },
+    { id: uniqid(), photo: Pig, name: 'Pigge', selected: false },
+    { id: uniqid(), photo: Pinocchio, name: 'Pinocchio', selected: false },
+    { id: uniqid(), photo: Pooh, name: 'Pooh', selected: false },
+    { id: uniqid(), photo: Snowman, name: 'Snowman', selected: false },
+    { id: uniqid(), photo: Sponge, name: 'Sponge Bob', selected: false },
+    { id: uniqid(), photo: Yoda, name: 'Yoda', selected: false }
 ];
