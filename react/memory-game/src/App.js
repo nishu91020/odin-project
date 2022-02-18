@@ -12,16 +12,29 @@ function App () {
         font-family: 'Redressed', cursive;
         background: linear-gradient(to top, #de5d83 90%, #000 100%);
         color: #ffd1dc;
-        padding: 1%;
+        padding: 1em;
     `;
     const CardOuterContainer = styled.div`
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        @media (max-width: 1098px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media (max-width: 818px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: 540px) {
+            grid-template-columns: 1fr;
+        }
     `;
     const DivHeader = styled.div`
         margin-bottom: 3%;
         display: grid;
         grid-template-columns: 6fr 1fr;
+        @media (max-width: 540px) {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
     `;
     const shuffleArray = () => {
         for (let i = 0; i < Items.length; i++) {
@@ -49,10 +62,10 @@ function App () {
         <DivContainer>
             <DivHeader>
                 <div>
-                    <h1 style={{ fontSize: '50px' }}>Disney Memory Game</h1>
-                    <h2 style={{ fontSize: '30px' }}>Earn points by clicking on cards but don't click any twice!</h2>
+                    <h1 style={{ fontSize: '3em' }}>Disney Memory Game</h1>
+                    <h2 style={{ fontSize: '1em' }}>Earn points by clicking on cards but don't click any twice!</h2>
                 </div>
-                <div style={{ fontSize: '24px', fontWeight: 'bold' }}>
+                <div style={{ fontSize: '1em', fontWeight: 'bold' }}>
                     <div>Score: {score}</div>
                     <div>Highest Score: {HighestScore}</div>
                 </div>
