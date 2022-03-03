@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//custom routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -15,10 +16,11 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: false })); // form data parser
+app.use(cookieParser()); //parse cookies
+app.use(express.static(path.join(__dirname, 'public'))); //set static path
 
+//Routing
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

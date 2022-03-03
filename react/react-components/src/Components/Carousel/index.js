@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 
-/* App components*/
-
-import ImageCard from '../ImageCard';
-import { imgArray } from '../images';
 /* Material UI Components*/
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-function Carousel () {
+function Carousel (props) {
     const [ index, setIndex ] = useState(0);
-    let len = imgArray.length;
+    let len = props.children.length ? props.children.length : 1;
     useEffect(() => {
         const interval = setInterval(() => {
             setIndex((index + 1) % len);
@@ -18,10 +15,9 @@ function Carousel () {
     });
     return (
         <Container>
-            {imgArray.map((item, ind) => {
-                if (ind === index) return <ImageCard im={item} key={ind} />;
-                else return '';
-            })}
+            <FiChevronLeft size={40} />
+            {props.children[index]}
+            <FiChevronRight size={40} />
         </Container>
     );
 }
