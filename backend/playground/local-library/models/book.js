@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const bookSchema = Schema({
+const bookSchema = new Schema({
     title: { type: String, required: true, maxLength: 100 },
     author: { type: Schema.Types.ObjectId, ref: 'Author', required: true },
     summary: { type: String, required: true },

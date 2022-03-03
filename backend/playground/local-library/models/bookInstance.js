@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const bookInstanceSchema = Schema({
+const bookInstanceSchema = new Schema({
     book: { type: Schema.Types.ObjectId, Ref: 'Book' },
     imprint: { type: String, required: true },
     status: { type: String, required: true, enum: [ 'Available', 'Maintenance', 'Loaned', 'Reserved' ], default: 'Maintenance' },
