@@ -1,6 +1,7 @@
 const Genre = require('../models/genre');
 const Book = require('../models/book');
 const async = require('async');
+const mongoose = require('mongoose');
 
 exports.genre_list = function (req, res) {
     Genre.find().sort([ [ 'name', 'ascending' ] ]).exec(function (err, list_genre) {
@@ -9,13 +10,15 @@ exports.genre_list = function (req, res) {
 };
 
 exports.genre_detail = function (req, res, next) {
+    var id = mongoose.Types.ObjectId(req.params.id);
     async.parallel(
         {
             genre: function (callback) {
-                Genre.findById(req.params.id).exec(callback);
+                Genre.findById(id).exec(callback);
             },
+
             genre_books: function (callback) {
-                Book.find({ genre: req.params.id }).exec(callback);
+                Book.find({ genre: id }).exec(callback);
             }
         },
         function (err, results) {
@@ -23,15 +26,11 @@ exports.genre_detail = function (req, res, next) {
                 return next(err);
             }
             if (results.genre == null) {
-                let err = new Error('Genre not found');
+                var err = new Error('Genre not found');
                 err.status = 404;
                 return next(err);
             }
-            res.render('genre_detail', {
-                title: 'Genre_Detail',
-                genre: results.genre,
-                genre_books: results.genre_books
-            });
+            res.render('genre_detail', { title: 'Genre Detail', genre: results.genre, genre_books: results.genre_books });
         }
     );
 };
