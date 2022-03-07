@@ -1,13 +1,33 @@
-const author = require('../models/author');
 const Author = require('../models/author');
+const async = require('async');
 
 exports.author_list = function (req, res) {
-    author.find().sort([ [ 'family_name', 'ascending' ] ]).exec(function (err, list_author) {
+    Author.find().sort([ [ 'family_name', 'ascending' ] ]).exec(function (err, list_author) {
         res.render('author_list', { title: 'Author List', author_list: list_author });
     });
 };
-exports.author_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: Author detail: ' + req.params.id);
+exports.author_detail = function (req, res, next) {
+    async.parallel(
+        {
+            author: function (callback) {
+                Author.findById(req.params.id).exec(callback);
+            },
+            author_books: function (callback) {
+                Book.findById({ author: req.params.id }, 'title summary').exec(callback);
+            }
+        },
+        function (err, results) {
+            if (err) {
+                return next(err);
+            }
+            if (results.author_books == null) {
+                let err = new Error('Author not found');
+                err.status = 404;
+                return next(err);
+            }
+            return res.render('author_detail', { title: 'Author Detail', author: results.author, author_books: results.author_books });
+        }
+    );
 };
 exports.author_create_get = function (req, res) {
     res.send('NOT IMPLEMENTED: Author create GET');
