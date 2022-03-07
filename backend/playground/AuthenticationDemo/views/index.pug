@@ -1,4 +1,12 @@
 extends layout 
 
 block content
+    if user
+        p #{user.username}
     p Hello world!!
+    p 
+        a(href="/signup") Signup
+    p 
+        a(href="/signin") Signin
+    p 
+        a(href="/logout") Logout

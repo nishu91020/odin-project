@@ -18,6 +18,33 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 
+passport.use(
+    new localStratergy((username, password, cb) => {
+        User.findOne({ username: username }, (err, user) => {
+            if (err) {
+                return cb(err);
+            }
+            if (!user) {
+                return cb(null, false, { message: 'Incorrect username' });
+            }
+            if (user.password !== password) {
+                return cb(null, false, { message: 'Incorrect password' });
+            }
+            return cb(null, user);
+        });
+    })
+);
+
+passport.serializeUser(function (user, cb) {
+    cb(null, user.id);
+});
+
+passport.deserializeUser(function (id, cb) {
+    User.findById(id, function (err, user) {
+        cb(err, user);
+    });
+});
+
 const app = express();
 
 app.set('views', __dirname + '/views');
@@ -29,22 +56,38 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { user: req.user });
 });
 app.get('/signup', (req, res) => {
     res.render('signup');
 });
+app.get('/signin', (req, res) => {
+    res.render('signin');
+});
+app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
+
 app.post('/signup', (req, res, next) => {
     const user = new User({
         username: req.body.username,
         password: req.body.password
     }).save(err => {
         if (err) {
-            next(err);
+            return next(err);
         }
         res.redirect('/');
     });
 });
+
+app.post(
+    '/signin',
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/'
+    })
+);
 app.listen(3000, () => {
     console.log('app listning.....');
 });
