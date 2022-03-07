@@ -19,6 +19,7 @@ exports.bookinstance_detail = function (req, res, next) {
             err.status = 404;
             return next(err);
         }
+        console.log(result);
         return res.render('bookinstance_detail', { title: 'Book Copy:' + result.book.title, bookinstance: result });
     });
 };

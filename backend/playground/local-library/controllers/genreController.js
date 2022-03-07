@@ -22,10 +22,11 @@ exports.genre_detail = function (req, res, next) {
             }
         },
         function (err, results) {
+            console.log(results);
             if (err) {
                 return next(err);
             }
-            if (results.genre == null) {
+            if (results.genre === null) {
                 var err = new Error('Genre not found');
                 err.status = 404;
                 return next(err);

@@ -1,4 +1,5 @@
 const Author = require('../models/author');
+const Book = require('../models/book');
 const async = require('async');
 
 exports.author_list = function (req, res) {
@@ -13,7 +14,7 @@ exports.author_detail = function (req, res, next) {
                 Author.findById(req.params.id).exec(callback);
             },
             author_books: function (callback) {
-                Book.findById({ author: req.params.id }, 'title summary').exec(callback);
+                Book.find({ author: req.params.id }, 'title summary').exec(callback);
             }
         },
         function (err, results) {

@@ -46,7 +46,7 @@ exports.book_detail = function (req, res, next) {
             book: function (callback) {
                 Book.findById(req.params.id).populate('author').populate('genre').exec(callback);
             },
-            book_instance: function (callback) {
+            book_instances: function (callback) {
                 BookInstance.find({ book: req.params.id }).exec(callback);
             }
         },
@@ -54,12 +54,12 @@ exports.book_detail = function (req, res, next) {
             if (err) {
                 return next(err);
             }
-            if (results.book == null) {
+            if (results.book === null) {
                 let err = new Error('Book Not Found');
                 err.status = 404;
                 return next(err);
             }
-            return res.render('book_detail', { title: 'Book Details', book: results.book, book_instance: results.book_instance });
+            return res.render('book_detail', { title: 'Book Details', book: results.book, book_instances: results.book_instances });
         }
     );
 };
