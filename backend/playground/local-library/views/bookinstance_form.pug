@@ -1,18 +1,38 @@
-extends layout 
+extends layout
 
 block content
-    h1 #{title}
-    form(method='POST' action='')
-        label(for='first_name') First Name:
-        input#first_name.form-control(type="text" name="first_name" placeholder="First Name" value=(undefined===author?'':author.first_name))
-        label(for='last_name') Last Name:
-        input#last_name.form-control(type="text" name="last_name" placeholder="Last Name" value=(undefined===author?'':author.last_name))
-        label(for='date_of_birth') First Name:
-        input#date_of_birth.form-control(type="date" name="date_of_birth" placeholder="Date of birth" value=(undefined===author?'':author.date_of_birth))
-        label(for='first_name') First Name:
-        input#date_of_death.form-control(type="date" name="date_of_death" placeholder="Date of death" value=(undefined===author?'':author.date_of_death))
-        button.btn.btn-primary Submit 
-        if(errors)
-            ul 
-            for err in errors
-                li !=err.msg
+  h1=title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='book') Book:
+      select#book.form-control(type='select' placeholder='Select book' name='book' required='true')
+        - book_list.sort(function(a, b) {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+        for book in book_list
+          if bookinstance
+            option(value=book._id selected=(bookinstance.book.toString()==book._id.toString() ? 'selected' : false)) #{book.title}
+          else
+            option(value=book._id) #{book.title}
+
+    div.form-group
+      label(for='imprint') Imprint:
+      input#imprint.form-control(type='text' placeholder='Publisher and date information' name='imprint' required='true' value=(undefined===bookinstance ? '' : bookinstance.imprint))
+    
+    div.form-group
+      label(for='due_back') Date when book available:
+      input#due_back.form-control(type='date' name='due_back' value=(undefined===bookinstance ? '' : bookinstance.due_back))
+
+    div.form-group
+      label(for='status') Status:
+      select#status.form-control(type='select' placeholder='Select status' name='status' required='true')
+        option(value='Maintenance') Maintenance
+        option(value='Available') Available
+        option(value='Loaned') Loaned
+        option(value='Reserved') Reserved
+
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
