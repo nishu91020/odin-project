@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const localStratergy = require('passport-local').Strategy;
@@ -27,10 +28,14 @@ passport.use(
             if (!user) {
                 return cb(null, false, { message: 'Incorrect username' });
             }
-            if (user.password !== password) {
-                return cb(null, false, { message: 'Incorrect password' });
-            }
-            return cb(null, user);
+            bcrypt.compare(password, user.password, (err, res) => {
+                if (res) {
+                    return cb(null, res);
+                }
+                else {
+                    return cb(null, false, { message: 'incorrect username or password' });
+                }
+            });
         });
     })
 );
@@ -70,15 +75,27 @@ app.get('/logout', (req, res) => {
 });
 
 app.post('/signup', (req, res, next) => {
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password
-    }).save(err => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect('/');
+    const username = req.body.username;
+    const password = req.body.password;
+
+    bcrypt.hash(password, 12, (err, hashpassword) => {
+        if (err) return next(err);
+        const user = new User({ username, password: hashpassword });
+        user.save(err => {
+            if (err) return next(err);
+            res.redirect('/');
+        });
     });
+
+    // const user = new User({
+    //     username: req.body.username,
+    //     password: req.body.password
+    // }).save(err => {
+    //     if (err) {
+    //         return next(err);
+    //     }
+    //     res.redirect('/');
+    // });
 });
 
 app.post(
