@@ -5,6 +5,7 @@ exports.bookinstance_list = function (req, res, next) {
         if (err) {
             return next(err);
         }
+        console.log(list_bookinstances);
         res.render('bookinstance_list', { title: 'Book Instance List', bookinstance_list: list_bookinstances });
     });
 };
@@ -25,7 +26,7 @@ exports.bookinstance_detail = function (req, res, next) {
 };
 
 exports.bookinstance_create_get = function (req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance create GET');
+    res.render('bookinstance_form', { title: 'Create Book Instance' });
 };
 exports.bookinstance_create_post = function (req, res) {
     res.send('NOT IMPLEMENTED: BookInstance create POST');

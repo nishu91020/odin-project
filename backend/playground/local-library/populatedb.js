@@ -207,10 +207,10 @@ function createBookInstances (cb) {
                 bookInstanceCreate(books[0], 'London Gollancz, 2014.', false, 'Available', callback);
             },
             function (callback) {
-                bookInstanceCreate(books[1], ' Gollancz, 2011.', false, 'Loaned', callback);
+                bookInstanceCreate(books[1], ' Gollancz, 2011.', Date.now(), 'Loaned', callback);
             },
             function (callback) {
-                bookInstanceCreate(books[2], ' Gollancz, 2015.', false, false, callback);
+                bookInstanceCreate(books[2], ' Gollancz, 2015.', Date.now(), 'Maintenance', callback);
             },
             function (callback) {
                 bookInstanceCreate(books[3], 'New York Tom Doherty Associates, 2016.', false, 'Available', callback);
@@ -225,16 +225,16 @@ function createBookInstances (cb) {
                 bookInstanceCreate(books[4], 'New York, NY Tom Doherty Associates, LLC, 2015.', false, 'Available', callback);
             },
             function (callback) {
-                bookInstanceCreate(books[4], 'New York, NY Tom Doherty Associates, LLC, 2015.', false, 'Maintenance', callback);
+                bookInstanceCreate(books[4], 'New York, NY Tom Doherty Associates, LLC, 2015.', Date.now(), 'Maintenance', callback);
             },
             function (callback) {
-                bookInstanceCreate(books[4], 'New York, NY Tom Doherty Associates, LLC, 2015.', false, 'Loaned', callback);
+                bookInstanceCreate(books[4], 'New York, NY Tom Doherty Associates, LLC, 2015.', Date.now(), 'Loaned', callback);
             },
             function (callback) {
-                bookInstanceCreate(books[0], 'Imprint XXX2', false, false, callback);
+                bookInstanceCreate(books[0], 'Imprint XXX2', Date.now(), 'Maintenance', callback);
             },
             function (callback) {
-                bookInstanceCreate(books[1], 'Imprint XXX3', false, false, callback);
+                bookInstanceCreate(books[1], 'Imprint XXX3', Date.now(), 'Maintenance', callback);
             }
         ],
         // Optional callback

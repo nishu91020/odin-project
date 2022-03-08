@@ -65,7 +65,7 @@ exports.book_detail = function (req, res, next) {
 };
 
 exports.book_create_get = function (req, res) {
-    res.send('NOT IMPLEMENTED: book create GET');
+    res.render('book_form', { title: 'Create Book' });
 };
 exports.book_create_post = function (req, res) {
     res.send('NOT IMPLEMENTED: book create POST');
