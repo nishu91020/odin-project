@@ -5,11 +5,11 @@ block content
     form(method='POST' action='')
         label(for='first_name') First Name:
         input#first_name.form-control(type="text" name="first_name" placeholder="First Name" value=(undefined===author?'':author.first_name))
-        label(for='last_name') Last Name:
-        input#last_name.form-control(type="text" name="last_name" placeholder="Last Name" value=(undefined===author?'':author.last_name))
-        label(for='date_of_birth') First Name:
+        label(for='family_name') Last Name:
+        input#last_name.form-control(type="text" name="family_name" placeholder="Last Name" value=(undefined===author?'':author.family_name))
+        label(for='date_of_birth')  Date of birth:
         input#date_of_birth.form-control(type="date" name="date_of_birth" placeholder="Date of birth" value=(undefined===author?'':author.date_of_birth))
-        label(for='first_name') First Name:
+        label(for='first_name') Date of death:
         input#date_of_death.form-control(type="date" name="date_of_death" placeholder="Date of death" value=(undefined===author?'':author.date_of_death))
         button.btn.btn-primary Submit 
         if(errors)
