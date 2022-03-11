@@ -3,6 +3,7 @@ const Book = require('../models/book');
 const async = require('async');
 const mongoose = require('mongoose');
 const { body, validationResult } = require('express-validator');
+const genre = require('../models/genre');
 
 exports.genre_list = function (req, res) {
     Genre.find().sort([ [ 'name', 'ascending' ] ]).exec(function (err, list_genre) {
@@ -71,10 +72,50 @@ exports.genre_create_post = [
     }
 ];
 exports.genre_delete_get = function (req, res) {
-    res.send('NOT IMPLEMENTED: genre delete GET');
+    async.parallel(
+        {
+            genre_books: function (cb) {
+                Book.find({ genre: req.params.id }).exec(cb);
+            },
+            genre: function (cb) {
+                Genre.findById(req.params.id).exec(cb);
+            }
+        },
+        function (err, results) {
+            if (err) {
+                return next(err);
+            }
+            if (results.genre == null) {
+                res.redirect('/catalog/genres');
+            }
+            res.render('genre_delete', { genre: results.genre, genre_books: results.genre_books });
+        }
+    );
 };
-exports.genre_delete_post = function (req, res) {
-    res.send('NOT IMPLEMENTED: genre delete POST');
+exports.genre_delete_post = function (req, res, next) {
+    async.parallel(
+        {
+            genre_books: function (cb) {
+                Book.find({ genre: req.body.genreid }).exec(cb);
+            },
+            genre: function (cb) {
+                Genre.findById(req.body.genreid).exec(cb);
+            }
+        },
+        function (err, results) {
+            if (err) return next(err);
+            if (results.genre_books.length > 0) {
+                res.render('genre_delete', { genre_books: results.genre_books, genre: results.genre });
+                return;
+            }
+            else {
+                Genre.findByIdAndRemove(req.body.genreid, err => {
+                    if (err) return next(err);
+                    res.redirect('/catalog/genres');
+                });
+            }
+        }
+    );
 };
 exports.genre_update_get = function (req, res) {
     res.send('NOT IMPLEMENTED: genre update GET');
