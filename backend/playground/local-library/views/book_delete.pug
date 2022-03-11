@@ -1,0 +1,30 @@
+extends layout 
+
+block content 
+    h1 Delete Book: #{book.title}
+
+    h4 Copies 
+    if book_instances.length>0
+        p.text-danger #[strong You must delete these instances before deleting this book]
+        each val in book_instances 
+            hr
+            if val.status=='Available'
+                p.text-success #{val.status}
+            else if val.status=='Maintenance'
+                p.text-danger #{val.status}
+            else
+                p.text-warning #{val.status}
+            p #[strong Imprint:] #{val.imprint}
+            if val.status!='Available'
+                p #[strong Due back:] #{val.due_back}
+            p #[strong Id:]
+                a(href=val.url) #{val._id}
+        
+    else 
+        p #[strong Do you really want to delete this Book?]
+
+        form(method='POST' action='')
+            div.form-group
+                input#bookid.form-control(type='hidden',name='authorid', required='true', value=book._id )
+
+            button.btn.btn-primary(type='submit') Delete
