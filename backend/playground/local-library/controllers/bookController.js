@@ -157,7 +157,12 @@ exports.book_delete_get = function (req, res, next) {
         }
     );
 };
-exports.book_delete_post = [];
+exports.book_delete_post = function (req, res, next) {
+    Book.findByIdAndRemove(req.params.id, err => {
+        if (err) return next(err);
+        res.redirect('/catalog/books');
+    });
+};
 exports.book_update_get = function (req, res) {
     async.parallel(
         {
