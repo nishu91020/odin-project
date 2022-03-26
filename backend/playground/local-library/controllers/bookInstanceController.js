@@ -82,23 +82,50 @@ exports.bookinstance_update_get = function (req, res, next) {
             bookinstance: function (cb) {
                 BookInstance.findById(req.params.id).exec(cb);
             },
-            book: function (cb) {
+            books: function (cb) {
                 Book.find({}, 'title').exec(cb);
             }
         },
-        function (err, bookinstance, book) {
+        function (err, results) {
             if (err) {
                 return next(err);
             }
-            if (bookinstance == null) {
+            if (results.bookinstance == null) {
                 const err = new Error('Bookinstance Not Found');
                 err.status = 404;
                 return next(err);
             }
-            res.render('bookinstance_form', { title: 'Update Book Instance', bookinstance: bookinstance, book_list: book });
+            res.render('bookinstance_form', { title: 'Update Book Instance', book_list: results.books, bookinstance: results.bookinstance });
         }
     );
 };
-exports.bookinstance_update_post = function (req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance update POST');
-};
+exports.bookinstance_update_post = [
+    body('book').trim().isLength({ min: 1 }).withMessage("Book can't be empty").escape(),
+    body('imprint').trim().isLength({ min: 1 }).withMessage("Imprint can't be empty").escape(),
+    body('status').trim().isLength({ min: 1 }).withMessage('Book status required').escape(),
+    body('due_back', 'required field').optional({ checkFalsy: true }).isISO8601().toDate(),
+    function (req, res, next) {
+        let errors = validationResult(req);
+        const bookinstance = BookInstance({
+            book: req.body.book,
+            imprint: req.body.imprint,
+            status: req.body.status,
+            due_back: req.body.due_back,
+            _id: req.params.id
+        });
+        if (!errors.isEmpty()) {
+            Book.find({}, 'title').exec(function (err, books) {
+                if (err) return next(err);
+                res.render('bookinstance_form', { title: 'Create Book Instance', book_list: books, errors: errors.array() });
+            });
+        }
+        else {
+            Book.save(bookinstance, err => {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect(bookinstance.url);
+            });
+        }
+    }
+];

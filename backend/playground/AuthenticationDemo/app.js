@@ -55,7 +55,16 @@ const app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(
+    session({
+        secret: 'cats',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            maxAge: 60 * 60 * 1000 * 24
+        }
+    })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
